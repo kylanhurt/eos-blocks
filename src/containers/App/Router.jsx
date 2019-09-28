@@ -6,6 +6,7 @@ import MainWrapper from './MainWrapper';
 import LogIn from '../LogIn/index';
 import ExamplePageOne from '../Example/index';
 import ExamplePageTwo from '../ExampleTwo/index';
+import { RecentBlocksConnector } from '../../redux/connectors/RecentBlocksConnector'
 
 const Pages = () => (
   <Switch>
@@ -19,6 +20,7 @@ const wrappedRoutes = () => (
     <Layout />
     <div className="container__wrap">
       <Route path="/pages" component={Pages} />
+      <Route path="/" component={RecentBlocksConnector} />
     </div>
   </div>
 );
@@ -27,7 +29,6 @@ const Router = () => (
   <MainWrapper>
     <main>
       <Switch>
-        <Route exact path="/" component={LogIn} />
         <Route exact path="/log_in" component={LogIn} />
         <Route path="/" component={wrappedRoutes} />
       </Switch>
