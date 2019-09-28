@@ -6,7 +6,7 @@ import MainWrapper from './MainWrapper';
 import LogIn from '../LogIn/index';
 import ExamplePageOne from '../Example/index';
 import ExamplePageTwo from '../ExampleTwo/index';
-import { RecentBlocksConnector } from '../../redux/connectors/RecentBlocksConnector'
+import RecentBlocksConnector from '../../redux/connectors/RecentBlocksConnector'
 
 const Pages = () => (
   <Switch>

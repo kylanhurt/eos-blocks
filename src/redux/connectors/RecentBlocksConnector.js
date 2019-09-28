@@ -17,4 +17,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export const RecentBlocksConnector = connect(mapStateToProps, mapDispatchToProps)(RecentBlocksComponent)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RecentBlocksComponent)
