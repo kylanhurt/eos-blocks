@@ -4,7 +4,7 @@ import { Api, JsonRpc, RpcError } from 'eosjs'
 import type { ChainInfo, BlockInfo } from '../../types/types'
 import fetch from 'node-fetch'
 
-const ENDPOINT = `https://api.eosnewyork.io` // https://api.eossweden.org
+const ENDPOINT = `https://api.eossweden.org` // https://api.eosnewyork.io
 const rpc = new JsonRpc(ENDPOINT, { fetch })
 // const api = new Api({ rpc })
 
