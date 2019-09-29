@@ -1,2 +1,5 @@
 build
 node_modules
+build/tests
+tests/build
+prep
