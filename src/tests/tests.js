@@ -40,6 +40,24 @@ const mockChainInfoResponse = {
   fork_db_head_block_id: '04e3028177b48e8b4c16d3cf09658ac074a93bfad405070f085f417cd6b0248c'
 }
 
+const mockBlockInfoResponse = {
+  action_mroot: "0471ddd74606f6cae372d02babb5e0ad5556e86fbbf26838a4a2acf7c851c049",
+  block_extensions: [],
+  block_num: 81988866,
+  confirmed: 0,
+  header_extensions: [],
+  id: "04e30d029ad5d18a908f3e79108008dee6f7531951f9a58c11e6de894fc40833",
+  new_producers: null,
+  previous: "04e30d01e6cabf0e5a91ecbecb073bd9c8b07e16a0b4d867d37e6757e3a2ca1a",
+  producer: "starteosiobp",
+  producer_signature: "SIG_K1_KANYnWJBapjmUkckFov2juiuvtBX1ZnaiYuRJbWj3RfusdUiHEs6yHF5uRKgLRaTzCbYaxF5fs2oH6kBvPVqVT7gYiJPdz",
+  ref_block_prefix: 2034143120,
+  schedule_version: 1379,
+  timestamp: "2019-09-29T23:14:42.500",
+  transaction_mroot: "96334016bf60da2dfe5a30aa8a3455e9298cfb144978f5d1fde473d3af298fb5",
+  transactions: []
+}
+
 const mockServiceCreator = (body, succeeds = true) => () =>
   new Promise((resolve, reject) => {
     setTimeout(() => (succeeds ? resolve(body) : reject(body)), 10)
@@ -60,14 +78,13 @@ const mockServiceCreator = (body, succeeds = true) => () =>
         }
        })
     })
+
     describe('when the app requests the chain_info', () => {
-      it('returns a valid response from block producer', () =>
+      it('returns a valid chain_info response from block producer', () =>
         store
           .dispatch(blockActions.fetchChainInfo(mockServiceCreator(mockChainInfoResponse)))
           .then((res) => {
-            console.log(store.getActions())
-            // expect({ type: 'CHAIN_INFO', data: mockChainInfoResponse }).to.be.oneOf(store.getActions())
-            console.log('res is ', res)
+            // expect(store.getActions()[0]).to.deep.equal({ type: 'CHAIN_INFO', data: mockChainInfoResponse })
             res.block_cpu_limit.should.be.a('number')
             res.block_net_limit.should.be.a('number')
             res.chain_id.should.be.a('string')
@@ -86,34 +103,27 @@ const mockServiceCreator = (body, succeeds = true) => () =>
           })
         )
       })
+
+      describe('when the app requests the block_info', () => {
+        it('returns a valid block_info response from block producer', () =>
+          store
+            .dispatch(blockActions.fetchBlockInfo(81988866))
+            .then((res) => {
+              res.action_mroot.should.be.a('string')
+              res.block_extensions.should.be.a('array')
+              res.block_num.should.be.a('number')
+              res.confirmed.should.be.a('number')
+              res.header_extensions.should.be.a('array')
+              res.id.should.be.a('string')
+              res.previous.should.be.a('string')
+              res.producer.should.be.a('string')
+              res.producer_signature.should.be.a('string')
+              res.ref_block_prefix.should.be.a('number')
+              res.schedule_version.should.be.a('number')
+              res.timestamp.should.be.a('string')
+              res.transaction_mroot.should.be.a('string')
+              res.transactions.should.be.a('array')
+            })
+          )
+        })
     })
-
-      // describe('when login succeeds and OTP is required', () => {
-
-      //   it('dispatches action to store phone numbers and updates the route', () => {
-      //     const actions = store.getActions()
-      //     const { phoneNumbers } = RESPONSE_BODY
-      //     expect(actions).toContainEqual({
-      //       type: ACTION_STORE_PHONE_NUMBERS,
-      //       payload: { phoneNumbers },
-      //     })
-      //     expect(actions).toContainEqual(push('/select-otp-delivery'))
-      //   })
-      // })
-
-// describe('poolRoutes return correct info', () => {
-//   describe('/GET block data', () => {
-//     it('/pool/block should return most recent pool block data', (done) => {
-//       chai.request(server)
-//         .get('/pool/block')
-//         .end((err, res) => {
-//             res.should.have.status(200)
-//             res.body.should.be.a('object')
-//             res.body.height.should.be.a('number')
-//             res.body.height.should.be.above(0)
-//             res.body.timestamp.should.be.a('number')
-//             res.body.timestamp.should.be.above(1500000000)
-//           done()
-//         })
-//     })
-//   })
