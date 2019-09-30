@@ -18,7 +18,6 @@ export const fetchRecentBlocks = () => async (dispatch: Dispatch, getState: GetS
       recentBlockPromises[blockNum] = await dispatch(fetchBlockInfo(blockNum))
     }
     await Promise.all(Object.values(recentBlockPromises))
-    console.log('howdy')
   } catch (e) {
 
   }
@@ -51,6 +50,19 @@ export const fetchBlockInfo = (blockNum: number) => async (dispatch: Dispatch, g
       data: blockInfoResponse
     })
     return blockInfoResponse
+  } catch (e) {
+
+  }
+}
+
+export const fetchTransactionInfo = (trx: string, blockNumHint: number) => async (dispatch: Dispatch, getState: GetState) => {
+  try {
+    const transactionInfoResponse = await rpc.get_transaction(trx, )
+    dispatch({
+      type: 'BLOCK_INFO',
+      data: transactionInfoResponse
+    })
+    return transactionInfoResponse
   } catch (e) {
 
   }

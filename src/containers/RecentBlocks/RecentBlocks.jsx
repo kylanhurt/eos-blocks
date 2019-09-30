@@ -1,7 +1,7 @@
 // @flow
 import React, { Fragment } from 'react'
 import { Col, Card, CardBody, Table, Button, Collapse } from 'reactstrap'
-
+import { TransactionRowConnector } from '../../redux/connectors/TransactionRowConnector'
 export type RecentBlocksStateProps = {
   recentBlocks: Object
 }
@@ -114,7 +114,9 @@ export class RecentBlocksRow extends React.Component<RecentBlocksRowProps, Recen
         <tr style={{ display: isExpanded ? 'table-row' : 'none' }}>
           <td colSpan='6'>
             <Collapse isOpen={isExpanded}>
-              {JSON.stringify(block)}
+              {block.transactions.map(tx => (
+                <TransactionRowConnector tx={tx} key={tx.trx.id || tx.trx} blockNum={block.block_num} />
+              ))}
             </Collapse>
           </td>
         </tr>
