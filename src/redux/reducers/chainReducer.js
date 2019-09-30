@@ -23,7 +23,25 @@ const recentBlocks = (state: BlockInfo = {}, action: { type: string, data: Block
   }
 }
 
+const accountAbis = (state = {}, action: { type: string, data: { account: string, abi: Object }}) => {
+  switch (action.type) {
+    case 'ACCOUNT_ABI':
+      return {
+        ...state,
+        [action.data.account_name]: action.data.abi
+      }
+    case 'MULTIPLE_ACCOUNT_ABIS':
+      return {
+        ...state,
+        ...action.data
+      }
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   chainInfo,
-  recentBlocks
+  recentBlocks,
+  accountAbis
 })

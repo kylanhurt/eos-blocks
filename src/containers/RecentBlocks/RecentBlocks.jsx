@@ -1,7 +1,7 @@
 // @flow
-import React, { Fragment } from 'react'
-import { Col, Card, CardBody, Table, Button, Collapse } from 'reactstrap'
-import { TransactionRowConnector } from '../../redux/connectors/TransactionRowConnector'
+import React from 'react'
+import { Col, Card, CardBody, Table } from 'reactstrap'
+import { RecentBlocksRowConnector } from '../../redux/connectors/RecentBlocksRowConnector'
 export type RecentBlocksStateProps = {
   recentBlocks: Object
 }
@@ -60,67 +60,13 @@ export class RecentBlocksComponent extends React.Component<RecentBlocksProps> {
               </thead>
               <tbody>
                 {blockList.map(block => (
-                  <RecentBlocksRow key={block.block_num} block={block} />
+                  <RecentBlocksRowConnector key={block.block_num} block={block} />
                 ))}
               </tbody>
             </Table>
           </CardBody>
         </Card>
       </Col>
-    )
-  }
-}
-
-type RecentBlocksRowProps = {
-  block: Object
-}
-
-type RecentBlocksRowState = {
-  isExpanded: boolean
-}
-
-export class RecentBlocksRow extends React.Component<RecentBlocksRowProps, RecentBlocksRowState> {
-  constructor (props: RecentBlocksRowProps) {
-    super(props)
-    this.state = {
-      isExpanded: false
-    }
-  }
-
-  toggle = () => {
-    const { isExpanded } = this.state
-    this.setState({
-      isExpanded: !isExpanded
-    })
-  }
-
-  render () {
-    const { block } = this.props
-    const { isExpanded } = this.state
-    return (
-      <Fragment>
-        <tr>
-          <td>{block.block_num}</td>
-          <td>{block.id}</td>
-          <td>{block.transactions.length}</td>
-          <td>{block.actionCount}</td>
-          <td>{block.date}</td>
-          <td style={{ textAlign: 'center' }}>
-            <Button color="primary" onClick={this.toggle} style={{ width: 160, paddingRight: 0, paddingLeft: 0, marginBottom: '0px', float: 'none', marginLeft: 'auto', marginRight: 'auto' }}>
-              <span style={{ width: '140px' }}>{isExpanded ? 'Hide' : 'Show'}</span>
-            </Button>
-          </td>
-        </tr>
-        <tr style={{ display: isExpanded ? 'table-row' : 'none' }}>
-          <td colSpan='6'>
-            <Collapse isOpen={isExpanded}>
-              {block.transactions.map(tx => (
-                <TransactionRowConnector tx={tx} key={tx.trx.id || tx.trx} blockNum={block.block_num} />
-              ))}
-            </Collapse>
-          </td>
-        </tr>
-      </Fragment>
     )
   }
 }

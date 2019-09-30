@@ -18,6 +18,7 @@ export const fetchRecentBlocks = () => async (dispatch: Dispatch, getState: GetS
       recentBlockPromises[blockNum] = await dispatch(fetchBlockInfo(blockNum))
     }
     await Promise.all(Object.values(recentBlockPromises))
+    console.log('check breakpoint')
   } catch (e) {
 
   }
@@ -49,6 +50,7 @@ export const fetchBlockInfo = (blockNum: number) => async (dispatch: Dispatch, g
       type: 'BLOCK_INFO',
       data: blockInfoResponse
     })
+    console.log('blockInfoResponse: ', blockInfoResponse)
     return blockInfoResponse
   } catch (e) {
 
@@ -63,6 +65,40 @@ export const fetchTransactionInfo = (trx: string, blockNumHint: number) => async
       data: transactionInfoResponse
     })
     return transactionInfoResponse
+  } catch (e) {
+
+  }
+}
+
+export const fetchAccountAbi = (account: string) => async (dispatch: Dispatch, getState: GetState) => {
+  try {
+    const accountAbiResponse = await rpc.get_abi(account)
+    dispatch({
+      type: 'ACCOUNT_ABI',
+      data: accountAbiResponse
+    })
+    return accountAbiResponse
+  } catch (e) {
+
+  }
+}
+
+export const fetchMultipleAccountAbis = (accounts: Array<string>) => async (dispatch: Dispatch, getState: GetState) => {
+  try {
+    const fetchMultipleAccountAbisPromises = {}
+    const accountAbis = {}
+    accounts.forEach(account => {
+      fetchMultipleAccountAbisPromises[account] = rpc.get_abi(account)
+    })
+    const accountAbiResponses = await Promise.all(Object.values(fetchMultipleAccountAbisPromises))
+    accountAbiResponses.forEach(res => {
+      accountAbis[res.account_name] = res.abi
+    })
+    dispatch({
+      type: 'MULTIPLE_ACCOUNT_ABIS',
+      data: accountAbis
+    })
+    return accountAbis
   } catch (e) {
 
   }
