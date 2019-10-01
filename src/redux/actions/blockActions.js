@@ -18,7 +18,6 @@ export const fetchRecentBlocks = () => async (dispatch: Dispatch, getState: GetS
       recentBlockPromises[blockNum] = await dispatch(fetchBlockInfo(blockNum))
     }
     await Promise.all(Object.values(recentBlockPromises))
-    console.log('check breakpoint')
   } catch (e) {
 
   }
@@ -50,7 +49,6 @@ export const fetchBlockInfo = (blockNum: number) => async (dispatch: Dispatch, g
       type: 'BLOCK_INFO',
       data: blockInfoResponse
     })
-    console.log('blockInfoResponse: ', blockInfoResponse)
     return blockInfoResponse
   } catch (e) {
 
@@ -92,6 +90,12 @@ export const fetchMultipleAccountAbis = (accounts: Array<string>) => async (disp
     })
     const accountAbiResponses = await Promise.all(Object.values(fetchMultipleAccountAbisPromises))
     accountAbiResponses.forEach(res => {
+      res.abi.actions.forEach(action => {
+        if (action.ricardian_contract) {
+          // console.log('ricardian contract present, abi: ', res.abi)
+          console.log('ricardian contract present: ', action.ricardian_contract)
+        }
+      })
       accountAbis[res.account_name] = res.abi
     })
     dispatch({
