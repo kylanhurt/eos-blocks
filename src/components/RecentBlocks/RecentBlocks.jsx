@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import { Col, Card, CardBody, Table } from 'reactstrap'
+import { Col, Card, CardBody, Table, Button } from 'reactstrap'
 import { RecentBlocksRowConnector } from '../../redux/connectors/RecentBlocksRowConnector'
 export type RecentBlocksStateProps = {
   recentBlocks: Object
@@ -18,7 +18,7 @@ export class RecentBlocksComponent extends React.Component<RecentBlocksProps> {
   }
 
   render () {
-    const { recentBlocks } = this.props
+    const { recentBlocks, fetchChainInfo } = this.props
     const blockList = []
     const blockNumbers = Object.keys(recentBlocks)
     const maxBlockNumber = Math.max(...blockNumbers.map(blockNumString => parseInt(blockNumString)))
@@ -45,7 +45,8 @@ export class RecentBlocksComponent extends React.Component<RecentBlocksProps> {
         <Card>
           <CardBody>
             <div className="card__title">
-              <h5 className="bold-text">Recent Blocks</h5>
+              <h3 className="bold-text" style={{ display: 'inline' }}>Recent Blocks</h3>
+              <Button style={{ marginLeft: 20, float: 'right' }} color="success" onClick={fetchChainInfo}>Refresh</Button>
             </div>
             <Table striped bordered hover responsive className={'recentBlocks'}>
               <thead>
