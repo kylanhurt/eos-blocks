@@ -47,7 +47,7 @@ export class RecentBlocksComponent extends React.Component<RecentBlocksProps> {
             <div className="card__title">
               <h5 className="bold-text">Recent Blocks</h5>
             </div>
-            <Table striped bordered hover responsive>
+            <Table striped bordered hover responsive className={'recentBlocks'}>
               <thead>
                 <tr>
                   <th>#</th>

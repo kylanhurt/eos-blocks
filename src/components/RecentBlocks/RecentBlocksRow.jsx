@@ -1,9 +1,10 @@
 // @flow
 
 import React, { Fragment } from 'react'
-import { Button, Collapse } from 'reactstrap'
+import { Button, Collapse, Table } from 'reactstrap'
 import { RicardianContractFactory } from 'ricardian-template-toolkit'
 import Parser from 'html-react-parser'
+import { ellipsizeString } from '../../utils/utils'
 
 type RecentBlocksRowProps = {
   block: Object,
@@ -40,7 +41,15 @@ export class RecentBlocksRowComponent extends React.Component<RecentBlocksRowPro
       }
       fetchMultipleAccountAbis(accounts)
     })
+  }
 
+  _downloadOutputFile = () => {
+    const { block } = this.props
+    const element = document.createElement('a')
+    const file = new Blob([JSON.stringify(block)], { type: 'application/json' })
+    element.href = URL.createObjectURL(file)
+    element.download = `blockOutput-${block.block_num}-${block.id.substring(0, 10)}.json`
+    element.click()
   }
 
   render () {
@@ -54,10 +63,6 @@ export class RecentBlocksRowComponent extends React.Component<RecentBlocksRowPro
       for (const transaction of block.transactions) {
         if (transaction.trx.transaction) {
           transaction.trx.transaction.actions.forEach((txAction, index) => {
-            // ricardianContracts.push({
-            //   name: action.name,
-            //   account: action.account
-            // })
             const accountAbi = accountAbis[txAction.account]
             if (accountAbi) {
               const abiAction = accountAbi.actions.find(abiAction => {
@@ -101,9 +106,17 @@ export class RecentBlocksRowComponent extends React.Component<RecentBlocksRowPro
         <tr style={{ display: isExpanded ? 'table-row' : 'none' }}>
           <td colSpan='12'>
             <Collapse isOpen={isExpanded}>
-              {ricardianContractMarkup.map(contract => (
-                Parser(contract.html)
-              ))}
+                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div>Output: {ellipsizeString(JSON.stringify(block), 140)}   (<a href='#' onClick={this._downloadOutputFile} style={{ fontWeight: 'bold' }}>Download</a>)</div>
+                </div>
+                <div style={{ paddingTop: 14, paddingBottom: 14 }}>
+                  <div>
+                    <h3>Ricardian Contracts:</h3>
+                    {ricardianContractMarkup.map(contract => (
+                      Parser(contract.html)
+                    ))}
+                  </div>
+                </div>
             </Collapse>
           </td>
         </tr>
