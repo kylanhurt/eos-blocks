@@ -2,7 +2,7 @@
 
 import React, { Fragment } from 'react'
 import { Button, Collapse } from 'reactstrap'
-import { RicardianContractFactory, getContractTextFromAbi, getMetadataAndContent } from 'ricardian-template-toolkit'
+import { RicardianContractFactory } from 'ricardian-template-toolkit'
 import Parser from 'html-react-parser'
 
 type RecentBlocksRowProps = {

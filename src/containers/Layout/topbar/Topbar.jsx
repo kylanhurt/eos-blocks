@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TopbarSidebarButton from './TopbarSidebarButton';
-import TopbarProfile from './TopbarProfile';
 
 class Topbar extends PureComponent {
   static propTypes = {
@@ -22,9 +21,6 @@ class Topbar extends PureComponent {
               changeSidebarVisibility={changeSidebarVisibility}
             />
             <Link className="topbar__logo" to="/dashboard_default" />
-          </div>
-          <div className="topbar__right">
-            <TopbarProfile />
           </div>
         </div>
       </div>
