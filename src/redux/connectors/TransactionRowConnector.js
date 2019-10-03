@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux'
-import { TransactionRowComponent } from '../../containers/TransactionRow/TransactionRow'
+import { TransactionRowComponent } from '../../components/TransactionRow/TransactionRow'
 import { fetchTransactionInfo } from '../actions/blockActions'
 
 const mapStateToProps = (state: any) => {

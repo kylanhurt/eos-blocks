@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux'
-import { RecentBlocksRowComponent } from '../../containers/RecentBlocks/RecentBlocksRow'
+import { RecentBlocksRowComponent } from '../../components/RecentBlocks/RecentBlocksRow'
 import { fetchAccountAbi, fetchMultipleAccountAbis } from '../actions/blockActions'
 
 const mapStateToProps = (state: any) => {

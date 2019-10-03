@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux'
-import { RecentBlocksComponent, type RecentBlocksStateProps } from '../../containers/RecentBlocks/RecentBlocks'
+import { RecentBlocksComponent, type RecentBlocksStateProps } from '../../components/RecentBlocks/RecentBlocks'
 import { fetchChainInfo } from '../actions/blockActions'
 
 const mapStateToProps = (state: any): RecentBlocksStateProps => {
