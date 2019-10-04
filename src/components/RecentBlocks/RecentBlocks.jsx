@@ -2,8 +2,10 @@
 import React from 'react'
 import { Col, Card, CardBody, Table, Button } from 'reactstrap'
 import { RecentBlocksRowConnector } from '../../redux/connectors/RecentBlocksRowConnector'
+import { type BlockInfo } from '../../types/types'
+
 export type RecentBlocksStateProps = {
-  recentBlocks: Object
+  recentBlocks: {[string]: BlockInfo}
 }
 
 export type RecentBlocksDispatchProps = {
@@ -12,7 +14,7 @@ export type RecentBlocksDispatchProps = {
 
 export type RecentBlocksProps = RecentBlocksStateProps & RecentBlocksDispatchProps
 export class RecentBlocksComponent extends React.Component<RecentBlocksProps> {
-  componentDidMount (){
+  async componentDidMount () {
     const { fetchChainInfo } = this.props
     fetchChainInfo()
   }

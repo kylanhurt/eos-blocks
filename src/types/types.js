@@ -1,6 +1,6 @@
 // @flow
 
-import { Dispatch as ReduxDispatch } from 'redux'
+import { Dispatch as ReduxDispatch, ThunkDispatch } from 'redux'
 export type Action = { type: string, data?: any }
 
 export interface State {
@@ -36,11 +36,48 @@ export type ChainInfo = {
   "fork_db_head_block_id": string
 }
 
+export type TransactionActions = {
+  "account": string,
+  "name": string,
+  "authorization": [
+      {
+          "actor": string,
+          "permission": string
+      }
+  ],
+  "data": {
+      "account": string,
+      "content": string
+  },
+  "hex_data": string
+}
+
+export type TRX = {
+  id: string,
+  signatures: Array<string>,
+  compression: string,
+  "compression": "none",
+  "packed_context_free_data": "",
+  "context_free_data": [],
+  "packed_trx": "a02e8c5d69f3fb453a100000000001e08f390d9b362fad00000000a44b91ba01308610818431ee3c00000000a8ed32326b308610818431ee3c62317c68624d3243414d63645a39784c6d726a4c6d4c6c4f46446c674b6f7a43564c364c464d50645a776f4c6c7a6a4c70396c6470596d67464c364c464d45667155734232616f4f636a615063443550636e6150474c325057447a5157546c69543d3d00",
+  "transaction": {
+      "expiration": "2019-09-26T03:21:04",
+      "ref_block_num": 62313,
+      "ref_block_prefix": 272254459,
+      "max_net_usage_words": 0,
+      "max_cpu_usage_ms": 0,
+      "delay_sec": 0,
+      "context_free_actions": [],
+      "actions": Array<TransactionActions>,
+      "transaction_extensions": Array<mixed>
+  }
+}
+
 export type Transaction = {
   status: string,
   cpu_usage_us: number,
   net_usage_words: number,
-  trx: string
+  trx: string | TRX
 }
 
 export type BlockInfo = {

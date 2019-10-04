@@ -1,12 +1,14 @@
 // @flow
 import type { Dispatch, GetState } from '../../types.js'
-import { Api, JsonRpc, RpcError } from 'eosjs'
-import type { ChainInfo, BlockInfo } from '../../types/types'
+import { JsonRpc } from 'eosjs'
+// import type { ChainInfo, BlockInfo } from '../../types/types'
 import fetch from 'node-fetch'
 
+// theoretically could use an array of BP's and locally use algorithm
+// to rate them based on speed and reliability... wouldn't want to
+// only rely upon one block producer
 const ENDPOINT = `https://api.eossweden.org` // https://api.eosnewyork.io
 const rpc = new JsonRpc(ENDPOINT, { fetch })
-// const api = new Api({ rpc })
 
 export const fetchRecentBlocks = () => async (dispatch: Dispatch, getState: GetState) => {
   try {

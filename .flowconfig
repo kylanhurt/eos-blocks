@@ -1,0 +1,6 @@
+[ignore]
+; Ignore "BUCK" generated dirs
+<PROJECT_ROOT>/\.vscode/
+
+; Ignore duplicate module providers
+.*/node_modules/**/*.*
