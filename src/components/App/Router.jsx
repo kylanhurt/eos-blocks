@@ -8,7 +8,7 @@ const wrappedRoutes = () => (
   <div>
     <Layout />
     <div className="container__wrap">
-      <Route path="/" component={RecentBlocksConnector} />
+      <Route path="/" component={() => <RecentBlocksConnector />} />
     </div>
   </div>
 )

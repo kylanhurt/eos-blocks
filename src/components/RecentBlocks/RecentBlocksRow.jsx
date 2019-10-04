@@ -106,10 +106,10 @@ export class RecentBlocksRowComponent extends React.Component<RecentBlocksRowPro
         <tr style={{ display: isExpanded ? 'table-row' : 'none' }}>
           <td colSpan='12'>
             <Collapse isOpen={isExpanded}>
-                <div className={'blockOutputArea'}>
+                <div className={'blocksOutputArea'}>
                   <div><strong>Block Output</strong>: {ellipsizeString(JSON.stringify(block), 140)}   (<a href='#' onClick={this._downloadOutputFile} style={{ fontWeight: 'bold' }}>Download</a>)</div>
                 </div>
-                <div style={{ paddingTop: 14, paddingBottom: 14 }}>
+                <div className={'ricardianContractTitleArea'}>
                   <div>
                     <h3>Ricardian Contracts:</h3>
                     {ricardianContractMarkup.map(contract => (
