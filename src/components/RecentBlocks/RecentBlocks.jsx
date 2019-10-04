@@ -45,8 +45,8 @@ export class RecentBlocksComponent extends React.Component<RecentBlocksProps> {
         <Card>
           <CardBody>
             <div className="card__title">
-              <h3 className="bold-text" style={{ display: 'inline' }}>Recent Blocks</h3>
-              <Button style={{ marginLeft: 20, float: 'right' }} color="success" onClick={fetchChainInfo}>Refresh</Button>
+              <h3 className={'bold-text recentBlocksTitle'}>Recent Blocks</h3>
+              <Button className={'reloadButton'} color="success" onClick={fetchChainInfo}>Refresh</Button>
             </div>
             <Table striped bordered hover responsive className={'recentBlocks'}>
               <thead>

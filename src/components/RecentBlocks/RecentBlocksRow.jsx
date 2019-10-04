@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react'
-import { Button, Collapse, Table } from 'reactstrap'
+import { Button, Collapse } from 'reactstrap'
 import { RicardianContractFactory } from 'ricardian-template-toolkit'
 import Parser from 'html-react-parser'
 import { ellipsizeString } from '../../utils/utils'
@@ -93,20 +93,20 @@ export class RecentBlocksRowComponent extends React.Component<RecentBlocksRowPro
       <Fragment>
         <tr>
           <td>{block.block_num}</td>
-          <td>{block.id}</td>
+          <td className={'blockId'}>{block.id}</td>
           <td>{block.transactions.length}</td>
           <td>{block.actionCount}</td>
           <td>{block.date}</td>
-          <td style={{ textAlign: 'center' }}>
-            <Button color="primary" onClick={this.toggle} style={{ width: 160, paddingRight: 0, paddingLeft: 0, marginBottom: '0px', float: 'none', marginLeft: 'auto', marginRight: 'auto' }}>
-              <span style={{ width: '140px' }}>{isExpanded ? 'Hide' : 'Show'}</span>
+          <td className={'hideShowButtonArea'}>
+            <Button color="primary" onClick={this.toggle} className={'toggleButton'}>
+              <span className={'hideShowButtonText'}>{isExpanded ? 'Hide' : 'Show'}</span>
             </Button>
           </td>
         </tr>
         <tr style={{ display: isExpanded ? 'table-row' : 'none' }}>
           <td colSpan='12'>
             <Collapse isOpen={isExpanded}>
-                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div className={'blockOutputArea'}>
                   <div><strong>Block Output</strong>: {ellipsizeString(JSON.stringify(block), 140)}   (<a href='#' onClick={this._downloadOutputFile} style={{ fontWeight: 'bold' }}>Download</a>)</div>
                 </div>
                 <div style={{ paddingTop: 14, paddingBottom: 14 }}>

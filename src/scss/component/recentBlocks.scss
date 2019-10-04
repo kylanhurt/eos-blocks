@@ -1,6 +1,45 @@
+.reloadButton {
+  margin-left: 20;
+  float: right;
+}
+
 .recentBlocks {
   font-size: 15px;
   td {
     vertical-align: middle;
+  }
+
+  .recentBlocksRows {
+    td.blockId {
+      word-break: break-all;
+    }
+  }
+  .hideShowButtonArea {
+    text-align: center;
+    .toggleButton {
+      width: 160px;
+      padding-right: 0;
+      padding-left: 0;
+      margin-bottom: 0;
+      float: none;
+      margin-left: auto;
+      margin-right: auto;
+
+      .hideShowButtonText {
+        width: 140px;
+      }
+    }
+  }
+
+  .blockOutputArea {
+    display: 'flex';
+    flex-direction: 'row';
+    align-items: 'center';
+    justify-content: 'space-between';
+  }
+
+  .richardContractTitleArea {
+    padding-top: 14;
+    padding-bottom: 14;
   }
 }
