@@ -1,6 +1,6 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Layout from '../Layout/index';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import Layout from '../Layout/index'
 import MainWrapper from './MainWrapper'
 import RecentBlocksConnector from '../../redux/connectors/RecentBlocksConnector'
 
