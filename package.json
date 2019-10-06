@@ -1,8 +1,8 @@
 {
-  "name": "easydev-seed",
-  "version": "2.0.0",
+  "name": "eos-block-explorer",
+  "version": "1.0.0",
+  "author": "Kylan Hurt <kylan.hurt@gmail.com> (https://github.com/kylanhurt)",
   "private": true,
-  "homepage": "http://previews.aspirity.com/easydev",
   "dependencies": {
     "@types/node-fetch": "^2.5.2",
     "@types/react-redux": "^7.1.4",
