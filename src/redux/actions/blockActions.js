@@ -57,19 +57,6 @@ export const fetchBlockInfo = (blockNum: number) => async (dispatch: Dispatch, g
   }
 }
 
-export const fetchTransactionInfo = (trx: string, blockNumHint: number) => async (dispatch: Dispatch, getState: GetState) => {
-  try {
-    const transactionInfoResponse = await rpc.get_transaction(trx, )
-    dispatch({
-      type: 'BLOCK_INFO',
-      data: transactionInfoResponse
-    })
-    return transactionInfoResponse
-  } catch (e) {
-
-  }
-}
-
 export const fetchAccountAbi = (account: string) => async (dispatch: Dispatch, getState: GetState) => {
   try {
     const accountAbiResponse = await rpc.get_abi(account)
