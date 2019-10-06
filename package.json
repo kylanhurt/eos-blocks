@@ -61,7 +61,8 @@
     "flow-coverage": "flow-coverage-report",
     "flow:0": "flow; exit 0",
     "prep": "rimraf prep && sucrase ./src/ -d ./prep --transforms imports,flow,jsx",
-    "build-test": "rimraf build/tests && sucrase ./src/tests -d ./build/tests --transforms imports"
+    "build-test": "rimraf build/tests && sucrase ./src/tests -d ./build/tests --transforms imports",
+    "precommit": "yarn flow && yarn test"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
