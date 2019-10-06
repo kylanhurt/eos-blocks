@@ -4,12 +4,15 @@
 }
 
 .recentBlocks {
+  margin-top: 14px;
   @include themify($themes) {
     color: themed('colorText');
   }
 
   tbody tr:hover td {
-    color: white;
+    @include themify($themes) {
+      color: themed('colorText');
+    }
   }
 
   font-size: 15px;
