@@ -40,7 +40,7 @@ const accountAbis = (state = {}, action: { type: string, data: { account: string
   }
 }
 
-export default combineReducers({
+export const chainReducer = combineReducers({
   chainInfo,
   recentBlocks,
   accountAbis
