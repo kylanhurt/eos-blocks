@@ -3,6 +3,9 @@ const configureMockStore = require('redux-mock-store').default
 const blockActions = require('../../prep/redux/actions/blockActions')
 const thunk = require('redux-thunk').default
 const chai = require('chai')
+const utils = require('../../prep/utils/utils')
+
+const ALPHA_NUMERIC_STRING = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
 
 chai.should()
 // const chai = require('chai')
@@ -85,4 +88,12 @@ const mockStore = configureMockStore(middlewares)
               })
             )
           })
+    })
+
+
+    describe('utility functions function correctly', () => {
+      it('ellipsize string properly truncates a string', () => {
+        const truncatedString = utils.ellipsizeString(ALPHA_NUMERIC_STRING, 10)
+        truncatedString.should.equal('ABCDE ... 67890')
+      })
     })
