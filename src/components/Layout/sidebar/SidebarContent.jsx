@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import SidebarCategory from './SidebarCategory'
-import { strings } from '../../../locales/string'
+import { strings as s } from '../../../locales/string'
 
 class SidebarContent extends Component {
   static propTypes = {
@@ -20,12 +20,12 @@ class SidebarContent extends Component {
     return (
       <div className="sidebar__content">
         <ul className="sidebar__block">
-          <SidebarCategory title="Layout" icon="layers">
+          <SidebarCategory title={s.sidebar_layout_link_title} icon="layers">
             <button type="button" className="sidebar__link" onClick={changeToLight}>
-              <p className="sidebar__link-title">{strings.sidebar_light_theme}</p>
+              <p className="sidebar__link-title">{s.sidebar_light_theme}</p>
             </button>
             <button type="button" className="sidebar__link" onClick={changeToDark}>
-              <p className="sidebar__link-title">{strings.sidebar_dark_theme}</p>
+              <p className="sidebar__link-title">{s.sidebar_dark_theme}</p>
             </button>
           </SidebarCategory>
         </ul>

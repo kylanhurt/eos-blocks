@@ -100,7 +100,7 @@ export class RecentBlocksRowComponent extends React.Component<RecentBlocksRowPro
           <td>{block.date}</td>
           <td className={'hideShowButtonArea'}>
             <Button color="primary" onClick={this.toggle} className={'toggleButton'}>
-              <span className={'hideShowButtonText'}>{isExpanded ? 'Hide' : 'Show'}</span>
+              <span className={'hideShowButtonText'}>{isExpanded ? s.recent_blocks_hide : s.recent_blocks_show}</span>
             </Button>
           </td>
         </tr>
