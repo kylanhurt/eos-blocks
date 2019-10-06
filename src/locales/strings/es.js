@@ -9,6 +9,7 @@ export const es = {
   recent_blocks_show: "Muestra",
   recent_blocks_hide: "Esconde",
   recent_blocks_block_output: "Contentos de Bloques",
+  recent_blocks_download_output: "Descarga",
   recent_blocks_ricardian_contracts: "Contratos Ricardianes",
   sidebar_layout_link_title: "Diseño",
   sidebar_light_theme: "Tema Ligera",

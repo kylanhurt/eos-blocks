@@ -108,7 +108,7 @@ export class RecentBlocksRowComponent extends React.Component<RecentBlocksRowPro
           <td colSpan='12'>
             <Collapse isOpen={isExpanded}>
                 <div className={'blocksOutputArea'}>
-                  <div><strong>{s.recent_blocks_block_output}</strong>: {ellipsizeString(JSON.stringify(block), 140)}   (<span onClick={this._downloadOutputFile} className={'downloadBlockOutputButton'}>Download</span>)</div>
+                  <div><strong>{s.recent_blocks_block_output}</strong>: {ellipsizeString(JSON.stringify(block), 140)}   (<strong onClick={this._downloadOutputFile} className={'downloadBlockOutputButton'}>{s.recent_blocks_download_output}</strong>)</div>
                 </div>
                 <div className={'ricardianContractTitleArea'}>
                   <div>

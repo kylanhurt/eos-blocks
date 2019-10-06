@@ -9,6 +9,7 @@ export const en = {
   recent_blocks_show: "Show",
   recent_blocks_hide: "Hide",
   recent_blocks_block_output: "Block Output",
+  recent_blocks_download_output: "Download",
   recent_blocks_ricardian_contracts: "Ricardian Contracts",
   sidebar_layout_link_title: "Layout",
   sidebar_light_theme: "Light Theme",
