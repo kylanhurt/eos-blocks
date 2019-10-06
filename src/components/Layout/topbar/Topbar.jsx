@@ -1,16 +1,17 @@
-import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import TopbarSidebarButton from './TopbarSidebarButton';
+import React, { PureComponent } from 'react'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import TopbarSidebarButton from './TopbarSidebarButton'
+import TopbarLanguage from './TopbarLanguage'
 
 class Topbar extends PureComponent {
   static propTypes = {
     changeMobileSidebarVisibility: PropTypes.func.isRequired,
     changeSidebarVisibility: PropTypes.func.isRequired,
-  };
+  }
 
   render() {
-    const { changeMobileSidebarVisibility, changeSidebarVisibility } = this.props;
+    const { changeMobileSidebarVisibility, changeSidebarVisibility } = this.props
 
     return (
       <div className="topbar">
@@ -22,10 +23,13 @@ class Topbar extends PureComponent {
             />
             <Link className="topbar__logo" to="/dashboard_default" />
           </div>
+          <div className="topbar__right">
+            <TopbarLanguage />
+          </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Topbar;
+export default Topbar
