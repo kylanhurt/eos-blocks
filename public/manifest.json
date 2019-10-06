@@ -1,6 +1,6 @@
 {
-  "short_name": "EasyDEV",
-  "name": "EasyDEV",
+  "short_name": "eos-block-explorer",
+  "name": "EOS Block Explorer",
   "icons": [
     {
       "src": "fav.ico",
