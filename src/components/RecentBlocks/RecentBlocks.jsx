@@ -3,6 +3,7 @@ import React from 'react'
 import { Col, Card, CardBody, Table, Button } from 'reactstrap'
 import { RecentBlocksRowConnector } from '../../redux/connectors/RecentBlocksRowConnector'
 import { type BlockInfo } from '../../types/types'
+import { strings as s } from '../../locales/string'
 
 export type RecentBlocksStateProps = {
   recentBlocks: {[string]: BlockInfo}
@@ -47,18 +48,18 @@ export class RecentBlocksComponent extends React.Component<RecentBlocksProps> {
         <Card>
           <CardBody>
             <div className="card__title">
-              <h3 className={'bold-text recentBlocksTitle'}>Recent Blocks</h3>
-              <Button className={'reloadButton'} color="success" onClick={fetchChainInfo}>Refresh</Button>
+              <h3 className={'bold-text recentBlocksTitle'}>{s.recent_blocks_table_title}</h3>
+              <Button className={'reloadButton'} color="success" onClick={fetchChainInfo}>{s.recent_blocks_refresh}</Button>
             </div>
             <Table striped bordered hover responsive className={'recentBlocks'}>
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Hash</th>
-                  <th>Transactions</th>
-                  <th>Actions</th>
-                  <th>Date</th>
-                  <th>Expand</th>
+                  <th>{s.recent_blocks_hash}</th>
+                  <th>{s.recent_blocks_transactions}</th>
+                  <th>{s.recent_blocks_actions}</th>
+                  <th>{s.recent_blocks_date}</th>
+                  <th>{s.recent_blocks_expand}</th>
                 </tr>
               </thead>
               <tbody>

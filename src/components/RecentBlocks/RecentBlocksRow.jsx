@@ -5,6 +5,7 @@ import { Button, Collapse } from 'reactstrap'
 import { RicardianContractFactory } from 'ricardian-template-toolkit'
 import Parser from 'html-react-parser'
 import { ellipsizeString } from '../../utils/utils'
+import { strings as s } from '../../locales/string'
 
 type RecentBlocksRowProps = {
   block: Object,
@@ -107,11 +108,11 @@ export class RecentBlocksRowComponent extends React.Component<RecentBlocksRowPro
           <td colSpan='12'>
             <Collapse isOpen={isExpanded}>
                 <div className={'blocksOutputArea'}>
-                  <div><strong>Block Output</strong>: {ellipsizeString(JSON.stringify(block), 140)}   (<span onClick={this._downloadOutputFile} className={'downloadBlockOutputButton'}>Download</span>)</div>
+                  <div><strong>{s.recent_blocks_block_output}</strong>: {ellipsizeString(JSON.stringify(block), 140)}   (<span onClick={this._downloadOutputFile} className={'downloadBlockOutputButton'}>Download</span>)</div>
                 </div>
                 <div className={'ricardianContractTitleArea'}>
                   <div>
-                    <h3>Ricardian Contracts:</h3>
+                    <h3>{s.recent_blocks_ricardian_contracts}:</h3>
                     {ricardianContractMarkup.map(contract => (
                       Parser(contract.html)
                     ))}
