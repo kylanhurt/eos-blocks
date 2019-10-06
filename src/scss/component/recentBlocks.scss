@@ -4,6 +4,14 @@
 }
 
 .recentBlocks {
+  @include themify($themes) {
+    color: themed('colorText');
+  }
+
+  tbody tr:hover td {
+    color: white;
+  }
+
   font-size: 15px;
   td {
     vertical-align: middle;
@@ -14,6 +22,13 @@
       word-break: break-all;
     }
   }
+
+  &.table-hover tbody tr:hover {
+    @include themify($themes) {
+      color: themed('colorText');
+    }
+  }
+
   .hideShowButtonArea {
     text-align: center;
     .toggleButton {

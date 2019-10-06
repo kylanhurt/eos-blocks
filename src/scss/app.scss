@@ -14,11 +14,12 @@
 @import './component/topbar';
 @import './component/load';
 @import './component/form';
-// added by me
-@import './component/recentBlocks';
 
 //pages...
 @import 'containers/account';
 
 //objects...
 @import 'objects/layout.scss';
+
+// added by me
+@import './component/recentBlocks';
