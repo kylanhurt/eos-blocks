@@ -4,17 +4,27 @@ import React, { Fragment } from 'react'
 import { Button, Collapse } from 'reactstrap'
 import { RicardianContractFactory } from 'ricardian-template-toolkit'
 import Parser from 'html-react-parser'
+import { type RicardianContractConfig, type RicardianContract } from '../../types/types'
 import { ellipsizeString } from '../../utils/utils'
 import { strings as s } from '../../locales/string'
 
-type RecentBlocksRowProps = {
-  block: Object,
-  accountAbis: Object,
+export type RecentBlocksRowDispatchProps = {
   fetchAccountAbi: (account: string) => void,
-  fetchMultipleAccountAbis: (accounts: Array<string>) => void
+  fetchMultipleAccountAbis: (accounts: Array<string>) => void,
 }
 
-type RecentBlocksRowState = {
+export type RecentBlocksRowOwnProps = {
+  key: string,
+  block: Object // needs elaboration
+}
+
+export type RecentBlocksRowStateProps = {
+  accountAbis: Object,
+}
+
+export type RecentBlocksRowProps = RecentBlocksRowDispatchProps & RecentBlocksRowStateProps & RecentBlocksRowOwnProps
+
+export type RecentBlocksRowState = {
   isExpanded: boolean
 }
 
@@ -70,7 +80,7 @@ export class RecentBlocksRowComponent extends React.Component<RecentBlocksRowPro
                 return txAction.name === abiAction.name
               })
               if (abiAction.ricardian_contract) {
-                const config = {
+                const config: RicardianContractConfig = {
                   abi: accountAbi,
                   transaction: transaction.trx.transaction,
                   actionIndex: index,
@@ -79,7 +89,7 @@ export class RecentBlocksRowComponent extends React.Component<RecentBlocksRowPro
                   // proper metadata defined
                   allowUnusedVariables: true
                 }
-                const ricardianContract = factory.create(config)
+                const ricardianContract: RicardianContract = factory.create(config)
                 const metadata = ricardianContract.getMetadata()
                 const html = ricardianContract.getHtml()
                 ricardianContractMarkup.push({ html, metadata })
@@ -107,17 +117,17 @@ export class RecentBlocksRowComponent extends React.Component<RecentBlocksRowPro
         <tr style={{ display: isExpanded ? 'table-row' : 'none' }}>
           <td colSpan='12'>
             <Collapse isOpen={isExpanded}>
-                <div className={'blocksOutputArea'}>
-                  <div><strong>{s.recent_blocks_block_output}</strong>: {ellipsizeString(JSON.stringify(block), 140)}   (<strong onClick={this._downloadOutputFile} className={'downloadBlockOutputButton'}>{s.recent_blocks_download_output}</strong>)</div>
+              <div className={'blocksOutputArea'}>
+                <div><strong>{s.recent_blocks_block_output}</strong>: {ellipsizeString(JSON.stringify(block), 140)}   (<strong onClick={this._downloadOutputFile} className={'downloadBlockOutputButton'}>{s.recent_blocks_download_output}</strong>)</div>
+              </div>
+              <div className={'ricardianContractTitleArea'}>
+                <div>
+                  <h3>{s.recent_blocks_ricardian_contracts}:</h3>
+                  {ricardianContractMarkup.map(contract => (
+                    Parser(contract.html)
+                  ))}
                 </div>
-                <div className={'ricardianContractTitleArea'}>
-                  <div>
-                    <h3>{s.recent_blocks_ricardian_contracts}:</h3>
-                    {ricardianContractMarkup.map(contract => (
-                      Parser(contract.html)
-                    ))}
-                  </div>
-                </div>
+              </div>
             </Collapse>
           </td>
         </tr>

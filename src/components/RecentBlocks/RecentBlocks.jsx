@@ -2,11 +2,11 @@
 import React from 'react'
 import { Col, Card, CardBody, Table, Button } from 'reactstrap'
 import { RecentBlocksRowConnector } from '../../redux/connectors/RecentBlocksRowConnector'
-import { type BlockInfo } from '../../types/types'
+import { type RecentBlocks } from '../../types/types'
 import { strings as s } from '../../locales/string'
 
 export type RecentBlocksStateProps = {
-  recentBlocks: {[string]: BlockInfo}
+  recentBlocks: RecentBlocks
 }
 
 export type RecentBlocksDispatchProps = {
@@ -14,7 +14,8 @@ export type RecentBlocksDispatchProps = {
 }
 
 export type RecentBlocksProps = RecentBlocksStateProps & RecentBlocksDispatchProps
-export class RecentBlocksComponent extends React.Component<RecentBlocksProps> {
+
+export class RecentBlocksComponent extends React.Component<RecentBlocksProps & RecentBlocksDispatchProps> {
   async componentDidMount () {
     const { fetchChainInfo } = this.props
     fetchChainInfo()
@@ -23,7 +24,7 @@ export class RecentBlocksComponent extends React.Component<RecentBlocksProps> {
   render () {
     const { recentBlocks, fetchChainInfo } = this.props
     const blockList = []
-    const blockNumbers = Object.keys(recentBlocks)
+    const blockNumbers: Array<string> = Object.keys(recentBlocks)
     const maxBlockNumber = Math.max(...blockNumbers.map(blockNumString => parseInt(blockNumString)))
     for (const blockNumber in recentBlocks) {
       if (parseInt(blockNumber) < maxBlockNumber - 9) continue
@@ -32,7 +33,7 @@ export class RecentBlocksComponent extends React.Component<RecentBlocksProps> {
       // time to count actions per block
       let actionCount = 0
       currentBlock.transactions.forEach(transaction => {
-        if (transaction.trx.transaction) {
+        if (typeof transaction.trx === 'object' && transaction.trx.transaction) {
           actionCount += transaction.trx.transaction.actions.length
         }
       })

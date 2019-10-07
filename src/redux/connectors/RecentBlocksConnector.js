@@ -1,6 +1,10 @@
 // @flow
 import { connect } from 'react-redux'
-import { RecentBlocksComponent, type RecentBlocksStateProps } from '../../components/RecentBlocks/RecentBlocks'
+import { RecentBlocksComponent,
+  type RecentBlocksStateProps,
+  type RecentBlocksDispatchProps
+} from '../../components/RecentBlocks/RecentBlocks'
+import { type Dispatch } from '../../types/types'
 import { fetchChainInfo } from '../actions/blockActions'
 
 const mapStateToProps = (state: any): RecentBlocksStateProps => {
@@ -9,7 +13,7 @@ const mapStateToProps = (state: any): RecentBlocksStateProps => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch): RecentBlocksDispatchProps => {
   return {
     fetchChainInfo: () => {
       dispatch(fetchChainInfo())

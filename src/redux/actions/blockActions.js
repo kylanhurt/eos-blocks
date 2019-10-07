@@ -1,7 +1,6 @@
 // @flow
-import type { Dispatch, GetState } from '../../types.js'
+import type { Dispatch, GetState, Abi, AbiActions } from '../../types/types'
 import { JsonRpc } from 'eosjs'
-// import type { ChainInfo, BlockInfo } from '../../types/types'
 import fetch from 'node-fetch'
 
 // theoretically could use an array of BP's and locally use algorithm
@@ -43,7 +42,6 @@ export const fetchChainInfo = () => async (dispatch: Dispatch, getState: GetStat
   }
 }
 
-
 export const fetchBlockInfo = (blockNum: number) => async (dispatch: Dispatch, getState: GetState) => {
   try {
     const blockInfoResponse = await rpc.get_block(blockNum)
@@ -59,7 +57,7 @@ export const fetchBlockInfo = (blockNum: number) => async (dispatch: Dispatch, g
 
 export const fetchAccountAbi = (account: string) => async (dispatch: Dispatch, getState: GetState) => {
   try {
-    const accountAbiResponse = await rpc.get_abi(account)
+    const accountAbiResponse: {account_name: string, abi: Abi} = await rpc.get_abi(account)
     dispatch({
       type: 'ACCOUNT_ABI',
       data: accountAbiResponse
@@ -77,9 +75,11 @@ export const fetchMultipleAccountAbis = (accounts: Array<string>) => async (disp
     accounts.forEach(account => {
       fetchMultipleAccountAbisPromises[account] = rpc.get_abi(account)
     })
+
     const accountAbiResponses = await Promise.all(Object.values(fetchMultipleAccountAbisPromises))
-    accountAbiResponses.forEach(res => {
-      res.abi.actions.forEach(action => {
+    // $FlowFixMe likely issue from using Object.values on previous line
+    accountAbiResponses.forEach((res: { abi: Abi }) => {
+      res.abi.actions.forEach((action: AbiActions) => {
         if (action.ricardian_contract) {
           // console.log('ricardian contract present, abi: ', res.abi)
           console.log('ricardian contract present: ', action.ricardian_contract)
