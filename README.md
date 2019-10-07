@@ -19,12 +19,12 @@ The purpose of this project is to create a prototype for an application that can
 
 This project is primarily written in Javascript and can most easily be run via our Dockerfile. It is also possible to start up the project without Docker but the latter process consists of many more steps and is less reliable. If you are *not* using Docker then you may need to install the following software on your computer:
 
-* [Yarn]()
-* [Sucrase]()
-* [Jest]()
-* [Flow]()
-* [Rimraf]()
-* [Chalk]()
+* [Yarn](https://yarnpkg.com)
+* [Sucrase](https://www.npmjs.com/package/sucrase)
+* [Jest](https://jestjs.io/)
+* [Flow](https://flow.org/)
+* [Rimraf](https://www.npmjs.com/package/rimraf)
+* [Chalk](https://www.npmjs.com/package/chalk)
 
 Simply clone the repository, then type `yarn && yarn start` into your terminal from within the repositories top-level directory (which should include a `package.json` file)
 
@@ -78,11 +78,11 @@ In addition to its core functionality I would like to highlight a fiew relevant 
 
 #### Static Type-Checking
 
-Since the themed layout that I was using was not implementing TypeScript, and the `*.ts` file-extension factor for TypeScript can make migrating from Javascript to TypeScript a bit of a hassle, I decided to use [flow](Flow.com) instead since it uses annotations rather file-extensions. I am also familiar with TypeScript but I made the decision to go with Flow. If I were working on a longer / larger project then it would make more sense to use TypeScript since EOSJS already uses it and has the relevant interfaces included as part of its repository. To see some of the EOS-related types that I defined for Flow you can look in the `src/types/types.js` file.
+Since the themed layout that I was using was not implementing TypeScript, and the `*.ts` file-extension factor for TypeScript can make migrating from Javascript to TypeScript a bit of a hassle, I decided to use [Flow](Flow.com) instead since it uses annotations rather file-extensions. I am also familiar with TypeScript but I made the decision to go with Flow. If I were working on a longer / larger project then it would make more sense to use TypeScript since EOSJS already uses it and has the relevant interfaces included as part of its repository. To see some of the EOS-related types that I defined for Flow you can look in the `src/types/types.js` file.
 
 #### Unit Testing, Integration Testing, and Snapshots
 
-Within the `src/tests` folder you can see a small sample of test that I wrote to demonstrate my understanding of different types of testing.
+Within the `src/tests` folder you can see a small sample of tests that I wrote to demonstrate my understanding of different types of testing.
 
 I used mocha + chai for integration testing to make sure that the block-producer API endpoints are returning correctly-typed data. Naturally, any integration test that requires an HTTP request can fail due to internet connectivity issues, so one must keep reports of failed tests in perspective.
 
