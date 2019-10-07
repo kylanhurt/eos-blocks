@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import '../../scss/app.scss'
 
 export class ActivityIndicator extends Component {
-  render() {
+  render () {
     return (
       <div className="load__icon-wrap">
         <svg className="load__icon">
