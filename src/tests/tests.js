@@ -5,21 +5,9 @@ const thunk = require('redux-thunk').default
 const chai = require('chai')
 
 chai.should()
-// const chai = require('chai')
-// const chaiHttp = require('chai-http')
-// const exclude = require('chai-exclude')
-// const should = chai.should()
-
-// const assert = chai.assert
-// chai.use(chaiHttp)
-// chai.use(exclude)
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
-// const ENDPOINT = `https://api.eossweden.org`
-// const rpc = new eosjs.JsonRpc(ENDPOINT, { fetch })
-// const api = new Api({ rpc })
-
 
   describe('fetch recent block info', () => {
     let store
