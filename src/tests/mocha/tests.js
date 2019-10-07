@@ -1,9 +1,10 @@
 // $flow
 const configureMockStore = require('redux-mock-store').default
 const blockActions = require('../../../prep/redux/actions/blockActions')
+const utils = require('../../utils/utils')
 const thunk = require('redux-thunk').default
 const chai = require('chai')
-
+const expect = chai.expect
 chai.should()
 
 const middlewares = [thunk]
@@ -25,7 +26,7 @@ const mockStore = configureMockStore(middlewares)
        })
     })
 
-    // unit tests
+    // integration tests
     describe('when the app requests the chain_info', () => {
       it('returns a valid chain_info response from block producer', () =>
         store
@@ -50,27 +51,36 @@ const mockStore = configureMockStore(middlewares)
         )
       })
 
-        // integration tests
-        describe('when the app requests the block_info', () => {
-          it('returns a valid block_info response from block producer', () =>
-            store
-              .dispatch(blockActions.fetchBlockInfo(81988866))
-              .then((res) => {
-                res.action_mroot.should.be.a('string')
-                res.block_extensions.should.be.a('array')
-                res.block_num.should.be.a('number')
-                res.confirmed.should.be.a('number')
-                res.header_extensions.should.be.a('array')
-                res.id.should.be.a('string')
-                res.previous.should.be.a('string')
-                res.producer.should.be.a('string')
-                res.producer_signature.should.be.a('string')
-                res.ref_block_prefix.should.be.a('number')
-                res.schedule_version.should.be.a('number')
-                res.timestamp.should.be.a('string')
-                res.transaction_mroot.should.be.a('string')
-                res.transactions.should.be.a('array')
-              })
-            )
-          })
+      describe('when the app requests the block_info', () => {
+        it('returns a valid block_info response from block producer', () =>
+          store
+            .dispatch(blockActions.fetchBlockInfo(81988866))
+            .then((res) => {
+              res.action_mroot.should.be.a('string')
+              res.block_extensions.should.be.a('array')
+              res.block_num.should.be.a('number')
+              res.confirmed.should.be.a('number')
+              res.header_extensions.should.be.a('array')
+              res.id.should.be.a('string')
+              res.previous.should.be.a('string')
+              res.producer.should.be.a('string')
+              res.producer_signature.should.be.a('string')
+              res.ref_block_prefix.should.be.a('number')
+              res.schedule_version.should.be.a('number')
+              res.timestamp.should.be.a('string')
+              res.transaction_mroot.should.be.a('string')
+              res.transactions.should.be.a('array')
+            })
+          )
+        })
+
+      // unit test
+      describe('utility functions should work correctly', () => {
+        it('ellipsizeString returns correct output', () => {
+          const input = 'ABCDEFGHIJKLM1234567890'
+          const expectedOutput = 'ABCD ... 7890'
+          const actualOutput = utils.ellipsizeString(input, 8)
+          expect(actualOutput).to.equal(expectedOutput)
+        })
+      })
     })
