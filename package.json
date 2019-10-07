@@ -63,7 +63,7 @@
     "flow-coverage": "flow-coverage-report",
     "flow:0": "flow; exit 0",
     "prep": "rimraf prep && sucrase ./src/ -d ./prep --transforms imports,flow,jsx",
-    "build-test": "rimraf build/tests && sucrase ./src/tests -d ./build/tests --transforms imports",
+    "build-test": "rimraf build/tests && sucrase ./src/tests -d ./build/tests --transforms imports,jsx,flow",
     "precommit": "yarn flow && yarn test"
   },
   "devDependencies": {
@@ -78,6 +78,7 @@
     "babel-jest": "^24.9.0",
     "babel-loader": "8.0.5",
     "babel-plugin-named-asset-import": "^0.3.1",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react-app": "^7.0.2",
     "babel-runtime": "6.26.0",
     "chai": "^4.2.0",
@@ -92,6 +93,7 @@
     "eslint-plugin-jsx-a11y": "6.2.1",
     "eslint-plugin-react": "7.12.4",
     "flow-bin": "^0.109.0",
+    "husky": "^3.0.8",
     "mocha": "^5.2.0",
     "node-sass": "^4.11.0",
     "react-hot-loader": "^4.8.0",
@@ -152,5 +154,10 @@
     "presets": [
       "react-app"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit"
+    }
   }
 }
