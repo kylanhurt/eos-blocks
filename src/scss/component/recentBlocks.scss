@@ -20,13 +20,8 @@
     vertical-align: middle;
   }
 
-  .recentBlocksRows {
-    td.blockId {
-      word-break: break-all;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+  td.blockId {
+    word-break: break-all;
   }
 
   &.table-hover tbody tr:hover {
