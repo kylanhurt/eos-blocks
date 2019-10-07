@@ -1,15 +1,20 @@
 // @flow
 import { connect } from 'react-redux'
-import { RecentBlocksRowComponent } from '../../components/RecentBlocks/RecentBlocksRow'
+import {
+  RecentBlocksRowComponent,
+  type RecentBlocksRowStateProps,
+  type RecentBlocksRowDispatchProps }
+  from '../../components/RecentBlocks/RecentBlocksRow'
 import { fetchAccountAbi, fetchMultipleAccountAbis } from '../actions/blockActions'
+import { type Dispatch } from '../../types/types'
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any): RecentBlocksRowStateProps => {
   return {
     accountAbis: state.chainInfo.accountAbis
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch): RecentBlocksRowDispatchProps => {
   return {
     fetchAccountAbi: (account: string) => {
       dispatch(fetchAccountAbi(account))

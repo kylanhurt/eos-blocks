@@ -16,9 +16,17 @@ const EsLng = () => (
   </span>
 )
 
-class TopbarLanguage extends PureComponent {
+type TopBarLanguageState = {
+  collapse: boolean,
+  mainButtonContent: any
+}
 
-  constructor() {
+type TopBarLanguageProps = {
+
+}
+
+class TopbarLanguage extends PureComponent<TopBarLanguageProps, TopBarLanguageState> {
+  constructor () {
     super()
     const searchParams = new URLSearchParams(window.location.search)
     const currentLang = searchParams.get('lang') || 'en'
@@ -28,7 +36,7 @@ class TopbarLanguage extends PureComponent {
     }
     this.state = {
       collapse: false,
-      mainButtonContent: chosen[currentLang],
+      mainButtonContent: chosen[currentLang]
     }
   }
 
@@ -36,7 +44,7 @@ class TopbarLanguage extends PureComponent {
     this.setState(prevState => ({ collapse: !prevState.collapse }))
   }
 
-  changeLanguage = (lng) => {
+  changeLanguage = (lng: string) => {
     const currentUrl = window.location.href
     let newUrl = currentUrl
     if (currentUrl.includes('lang=')) {
@@ -63,7 +71,7 @@ class TopbarLanguage extends PureComponent {
         window.location.assign(newUrl)
         this.setState({ mainButtonContent: <EnLng /> })
         break
-        case 'es':
+      case 'es':
         window.location.assign(newUrl)
         this.setState({ mainButtonContent: <EsLng /> })
         break
@@ -72,7 +80,7 @@ class TopbarLanguage extends PureComponent {
     }
   }
 
-  render() {
+  render () {
     const { mainButtonContent, collapse } = this.state
 
     return (

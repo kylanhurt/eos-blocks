@@ -97,3 +97,44 @@ export type BlockInfo = {
     "block_num": number,
     "ref_block_prefix": number
 }
+
+export type RecentBlocks = {[string]: BlockInfo}
+
+export type AbiActions = {
+  name: string,
+  type: string,
+  ricardian_contract: string
+}
+
+export type Abi = {
+  version: string;
+  types: Array<{ new_type_name: string, type: string }>,
+  structs: Array<{ name: string, base: string, fields: Array<{ name: string, type: string }> }>,
+  actions: Array<AbiActions>,
+  tables: Array<{ name: string, type: string, index_type: string, key_names: string[], key_types: string[] }>,
+  ricardian_clauses: Array<{ id: string, body: string }>,
+  error_messages: Array<{ error_code: string, error_msg: string }>,
+  abi_extensions: Array<{ tag: number, value: string }>,
+  variants?: Array<{ name: string, types: string[] }>
+}
+
+export type RicardianContractConfig = {
+  abi: Abi,
+  transaction: Transaction,
+  actionIndex: number,
+  maxPasses?: number,
+  allowUnusedVariables?: boolean
+}
+
+export type ContractMetadata = {
+  spec_version: string,
+  title: string,
+  summary: string,
+  icon: string,
+  [x: string]: any
+}
+
+export type RicardianContract = {
+  getHtml:() => string,
+  getMetadata: () => ContractMetadata
+}

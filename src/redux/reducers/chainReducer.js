@@ -1,5 +1,6 @@
 // @flow
-import type { ChainInfo, BlockInfo } from '../../types/types'
+
+import type { ChainInfo, BlockInfo, Abi, RecentBlocks } from '../../types/types'
 import { combineReducers } from 'redux'
 
 const chainInfo = (state: ChainInfo = {}, action: { type: string, data: ChainInfo }): ChainInfo => {
@@ -11,7 +12,7 @@ const chainInfo = (state: ChainInfo = {}, action: { type: string, data: ChainInf
   }
 }
 
-const recentBlocks = (state: BlockInfo = {}, action: { type: string, data: BlockInfo }): BlockInfo => {
+const recentBlocks = (state: RecentBlocks = {}, action: { type: string, data: BlockInfo }): RecentBlocks => {
   switch (action.type) {
     case 'BLOCK_INFO':
       return {
@@ -23,17 +24,23 @@ const recentBlocks = (state: BlockInfo = {}, action: { type: string, data: Block
   }
 }
 
-const accountAbis = (state = {}, action: { type: string, data: { account: string, abi: Object }}) => {
+export type AccountAbis = {[string]: Abi}
+type SingleAccountAbiAction = { type: string, data: {account_name: string, abi: Abi}}
+type MultipleAccountAbiAction = { type: string, data: {[string]: Abi }}
+
+const accountAbis = (state: AccountAbis = {}, action): AccountAbis => {
   switch (action.type) {
     case 'ACCOUNT_ABI':
+      const singleAction: SingleAccountAbiAction = action
       return {
         ...state,
-        [action.data.account_name]: action.data.abi
+        [singleAction.data.account_name]: singleAction.data.abi
       }
     case 'MULTIPLE_ACCOUNT_ABIS':
+      const multipleAction: MultipleAccountAbiAction = action
       return {
         ...state,
-        ...action.data
+        ...multipleAction.data
       }
     default:
       return state

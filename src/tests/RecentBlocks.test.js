@@ -1,4 +1,3 @@
-/* globals jest describe it expect */
 // @flow
 
 import React from 'react'
@@ -6,6 +5,7 @@ import ShallowRenderer from 'react-test-renderer/shallow'
 
 import { RecentBlocksComponent } from '../components/RecentBlocks/RecentBlocks.jsx'
 import { RECENT_BLOCKS_PROPS } from './RecentBlocksProps'
+const { describe, it, expect } = global
 
 describe('Recent blocks render', () => {
   it('should render with pre-defined props', () => {
