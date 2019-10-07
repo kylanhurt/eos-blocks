@@ -8,7 +8,7 @@ import '../../scss/app.scss'
 import Router from './Router'
 import store from './store'
 import ScrollToTop from './ScrollToTop'
-import { ActivityIndicator } from '../common/ActivityIndicator.jsx'
+import { ActivityIndicator } from '../common/ActivityIndicator'
 
 class App extends Component {
   constructor() {

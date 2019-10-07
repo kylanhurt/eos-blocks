@@ -1,6 +1,6 @@
 // $flow
 const configureMockStore = require('redux-mock-store').default
-const blockActions = require('../../prep/redux/actions/blockActions')
+const blockActions = require('../../../prep/redux/actions/blockActions')
 const thunk = require('redux-thunk').default
 const chai = require('chai')
 

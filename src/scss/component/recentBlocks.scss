@@ -23,6 +23,9 @@
   .recentBlocksRows {
     td.blockId {
       word-break: break-all;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 
